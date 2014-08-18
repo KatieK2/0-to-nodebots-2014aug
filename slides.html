@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">-->
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+  <!--This one seems to work all the time, but really small on ipad-->
+  <!--<meta name="viewport" content="initial-scale=0.4">-->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" media="all" href="theme/css/default.css">
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css">
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+  <script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+</head>
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+  <slide class="title-slide segue nobackground">
+    <aside class="gdbar"><img src="images/sjs.png"></aside><!-- Logo on top left of title slide. -->
+    <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+    </hgroup>
+  </slide>
+
+
+  <slide>
+    <aside class="note">
+      <section>
+        <p>I started playing with the Arduino about 6 months ago, and I've come to share what I learned.</p>
+        <p>Let me tell you, resistors used to be lot bigger.</p>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>About Me</h2>
+    </hgroup>
+    <article>
+      <ul>
+        <li style="margin-bottom: 2em;">Web Developer at Getty Images:
+          <ul>
+            <li style="margin-top: 2em;">
+              <img src="images/logo-gi.jpg" alt="Getty Images logo" class="logo" />
+              Front end web development (HTML, CSS/Sass, JavaScript/jQuery) focused on CMS integration
+            </li>
+          </ul>
+          </li>
+        <li style="margin-bottom: 2em;">Over 8 years of professional experience making websites</li>
+        <li style="margin-bottom: 2em;">Earned 2-year electronics engineering degree from vocational high school.</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>We only have 30 minutes, so I can't show you how to build a complete robot army from scratch. </li>
+          <li>But you will have the foundational knowledge to grab a kit, and get hacking!</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>About This Talk</h2>
+    </hgroup>
+    <article>
+      <figure style="width: 30%;">
+        <img src="images/a0073-000321.jpg" alt="Empty box" />
+        <figcaption>a0073-000321 / Empty box / Copyright Gregor Schuster</figcaption>
+      </figure>
+      <ol>
+        <li>Hardware Basics</li>
+        <li>Installs</li>
+        <li>Why JavaScript / Johnny-Five</li>
+        <li>Hardware demo: Blinky</li>
+        <li>Hardware demo: Servo</li>
+      </ol>
+    </article>
+  </slide>
+
+  <slide class="nofade">
+    <aside class="note">
+      <section>
+        <p>If you build, the ideas will come. You don't need a use case to start making.</p>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>About This Talk</h2>
+    </hgroup>
+    <article>
+      <figure style="width: 55%;">
+        <img src="images/89124745.jpg" alt="Empty box" />
+        <figcaption>89124745 / Cat in box / Copyright junku</figcaption>
+      </figure>
+      <ol>
+        <li>Hardware Basics</li>
+        <li>Installs</li>
+        <li>Why JavaScript / Johnny-Five</li>
+        <li>Hardware demo: Blinky</li>
+      </ol>
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Air is an insulator. *(Except for very very high voltage differentials [lightning] or over very short distances of air [static electricity])</li>
+          <li>You could "well actually" yourself to death by theoretical physics. You don't need to know how the compiler does <code>console.log("Hello World");</code> to write some code. So just understand that <em>everything</em> is an abstraction for simplicity's sake.</li>
+          <li>GND</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>Hardware: What's electricity?</h2>
+    </hgroup>
+    <article>
+      <figure>
+        <img src="images/83182153.jpg" alt="Cars on a toy racetrack" />
+        <figcaption>83182153 / Model race track / Copyright Andy Crawford</figcaption>
+      </figure>
+      <ul>
+        <li>Electrons jumping from one atom to the next</li>
+        <li>Volts: How many electrons are moving?</li>
+        <li>Amps: Power! How fast are they going?</li>
+        <li>Closed circuits, directionality matters</li>
+        <li>Well actually: voltage measures the difference in charge between two points</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Safety</h2>
+      <h3>Don't let the smoke out</h3>
+    </hgroup>
+    <article>
+      <figure style="width: 45%;">
+        <img src="images/486992155.jpg" alt="Wet cat" />
+        <figcaption>486992155 / Awkward Pet Portraits / Copyright Tavia</figcaption>
+      </figure>
+      <ul>
+        <li>Always kill the power before modifying a circuit</li>
+        <li>Some parts (LEDs, servos, sensors) care about direction; mind the GND</li>
+        <li>Do not get wet; water is a conductor</li>
+        <li>High amperage is what will kill you; unlikely to encounter</li>
+        <li>Always wear safety glasses if you're cutting wire</li>
+        <li>Solder is a burn risk; also wear glasses</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Avoid soldering and wire crimping with a breadboard</li>
+          <li>Convention: power rails, red = +5v / black = GND, standard form-factor for ICs and components</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>Breadboard</h2>
+      <h3>A rapid prototyping framework</h3>
+    </hgroup>
+    <article>
+      <img src="images/breadboard.png" alt="Photo of breadboard with circuits highlighted">
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Measures inputs, provides output and makes decisions</li>
+          <li>Power and communication from USB</li>
+          <li>The microcontroller is what executes code</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>Arduino - A Microcontroller (USB)</h2>
+    </hgroup>
+    <article style="text-align: center">
+      <img src="images/redboard-1.jpg" alt="Sparkfun Redboard with USB connection highlighted" style="height: 500px;" />
+    </article>
+  </slide>
+
+  <slide class="nofade">
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Pin 13 is special: built in LED and resistor</li>
+          <li>TX &amp; RX LEDs</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>Arduino - Pin 13</h2>
+    </hgroup>
+    <article style="text-align: center">
+      <img src="images/redboard-2.jpg" alt="Sparkfun Redboard with USB connection highlighted" style="height: 500px;" />
+    </article>
+  </slide>
+
+  <slide class="nofade">
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Ground / +5v</li>
+          <li>On LED - must be off before you change your circuit</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>Arduino - Power</h2>
+    </hgroup>
+    <article style="text-align: center">
+      <img src="images/redboard-3.jpg" alt="Sparkfun Redboard with USB connection highlighted" style="height: 500px;" />
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <p>I hope you like the command line.</p>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>Installs</h2>
+    </hgroup>
+    <article>
+      <p>All packages available for OSX, Windows and Linux</p>
+      <ol>
+        <li>Git! <a href="https://help.github.com/articles/set-up-git#platform-all">https://help.github.com/articles/set-up-git#platform-all</a></li>
+        <li>Node! <a href="http://nodejs.org/download/">http://nodejs.org/download/</a></li>
+        <li>Install the Arduino software <a href="http://arduino.cc/en/main/software">http://arduino.cc/en/main/software</a></li>
+        <li>
+          <img src="images/tool-serial-port.png" alt="Arduino.app screenshot - Tools > Serial Port > (newest entry)" style="float: right;" />
+          Replace default firmware on microcontroller
+          <ol>
+            <li>Connect microcontroller to computer</li>
+            <li>Open Arduino software</li>
+            <li>Tools &gt; Serial Port &gt; (whatever's newest)</li>
+           </ol>
+        </li>
+      </ol>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Installs</h2>
+    </hgroup>
+    <article>
+      <ol start="4">
+        <li>Replace default firmware on microcontroller (maybe)
+          <ol start="4">
+            <li>if (microcontroller != ArduinoUno ) {
+              <ol>
+                <li>Tools &gt; Board &gt; Arduino Uno (or closest)</li>
+                <li>File &gt; Examples &gt; Firmata &gt; StandardFirmata</li>
+                <li>Click Upload</li>
+              </ol>
+            };</li>
+          </ol>
+        </li>
+        <li>Close Arduino.app.</li>
+        <li>Install Johnny-Five: <code>npm install johnny-five</code></li>
+        <li>Install the Node ARDX guide:
+          <ol>
+            <li><code>git clone https://github.com/AnnaGerber/node-ardx.git</code></li>
+            <li><code>cd node-ardx</code></li>
+          </ol>
+        </li>
+      </ol>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Why JavaScript?</h2>
+    </hgroup>
+    <article>
+      <ul><!--  class="build" -->
+        <li>Arduino's native environment is C</li>
+        <li>I bet you already know JS</li>
+        <li><blockquote>Most systems using node-serialport (arduino, etc), are inherently reactionary in that they wait for some event or data and then do some thing.
+          </blockquote>
+          <cite><a href="http://www.voodootikigod.com/nodebots-the-rise-of-js-robotics/">http://www.voodootikigod.com/nodebots-the-rise-of-js-robotics/</a></cite>
+        </li>
+      </ul>
+    </article>
+  </slide>
+
+   <slide>
+    <hgroup>
+      <h2>Demo: Blinky</h2>
+    </hgroup>
+    <article class="smaller">
+      <p><a href="http://node-ardx.org/exercises/1">http://node-ardx.org/exercises/1</a>:</p>
+      <pre class="prettyprint" data-lang="cli">
+&gt; node code/CIRC-01-code-led-a-strobe.js
+
+<b>&gt; led.strobe(3000);</b>
+&gt; led.on();
+&gt; led.off();</pre>
+      <p>CIRC-01-code-led-a-strobe.js:</p>
+      <pre class="prettyprint" data-lang="javascript">
+var j5 = require("johnny-five");
+var myBoard, myLed;
+myBoard = new j5.Board();
+myBoard.on("ready", function() {
+  <b>myLed = new j5.Led(13);</b>
+  <b>myLed.strobe( 1000 );</b>
+  this.repl.inject({ // make myLED available as "led" in REPL
+      led: myLed
+  });
+  // try "on", "off", "toggle", "strobe", "stop"
+});</pre>
+    </article>
+  </slide>
+
+  <!-- !!! -->
+  <slide>
+    <hgroup>
+      <h2>Demo: Motor</h2>
+    </hgroup>
+    <article class="smaller">
+      <p><a href="http://node-ardx.org/exercises/3">http://node-ardx.org/exercises/3</a>:</p>
+      <pre class="prettyprint" data-lang="cli">
+<b>&gt; node code/CIRC03-code-motor.js</b></pre>
+      <p>CIRC03-code-motor.js:</p>
+      <pre class="prettyprint" data-lang="javascript">
+var five = require("johnny-five"), board, myMotor, led;
+board = new five.Board();
+board.on("ready", function() {
+  myMotor = new five.Motor({
+    pin: 9
+  });
+  myMotor.on("start", function( err, timestamp ) { // event handlers on start and stop
+    console.log( "started", timestamp );
+    board.wait(2000, function() { // stop after 2 seconds
+      myMotor.stop();
+    });
+  });
+  myMotor.on("stop", function( err, timestamp ) {
+    console.log( "stopped", timestamp );
+  });
+  myMotor.start();
+});</pre>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Buying Guide: Kits</h2>
+    </hgroup>
+    <article>
+      <ul>
+        <li><strong><a href="https://www.sparkfun.com/products/12001" title="https://www.sparkfun.com/products/12001">SparkFun Inventor's Kit</a></strong>: $100
+        <ul>
+          <li>Arduino-compatible board, breadboard, lots of sensors</li>
+          <li>Skip the guide, go directly to <a href="http://node-ardx.org/">http://node-ardx.org/</a></li>
+          <li>Use coupon code <b>RETROSPARK</b> for $10 off <small>(any order over $40 until Aug 31)</small></li>
+        </ul>
+        </li>
+        <li><strong><a href="http://www.makershed.com/products/maker-kit-with-chip-antenna-core" title="http://www.makershed.com/products/maker-kit-with-chip-antenna-core">Spark Core kit</a></strong>: $99
+          <ul>
+            <li>Built-in wifi. As with SIK, comes with breadboard, various LEDs, sensors and other components</li>
+            <li>Add a Shield Shield to make it Arduino compatible</li>
+          </ul>
+        </li>
+        <li><strong><a href="https://www.adafruit.com/products/170" title="https://www.adafruit.com/products/170">Adafruit ARDX - v1.3 Experimentation Kit</a></strong>: $85
+          <ul>
+            <li>Arduino Uno. As with SIK, comes with breadboard, various LEDs, sensors and other components
+              <ul>
+              <li><strong><a href="https://www.adafruit.com/products/193" title="https://www.adafruit.com/products/193">Adafruit Budget Pack for Arduino</a></strong>: $50</li>
+                <li>Fewer components, no guide</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Buying Guide: Just Microcontroller</h2>
+    </hgroup>
+    <article>
+      <p>You will need to buy other stuff - sensors, LEDs, etc.</p>
+      <ul>
+        <li><strong><a href="https://www.trycelery.com/shop/TEC" title="https://www.trycelery.com/shop/TEC">Tessel</a></strong>: $99 - $559
+         <ul>
+            <li>Built-in wifi and Node</li>
+            <li>"modules": pre-made hardware plugins</li>
+          </ul>
+        </li>
+        <li><strong><a href="https://www.sparkfun.com/products/12720" title="https://www.sparkfun.com/products/12720">Intel Galileo</a></strong>: $80
+          <ul>
+            <li>Arduino-compatible with enough processing power to run Node on-board</li>
+            <li>On-board wifi and ethernet</li>
+          </ul>
+        </li>
+        <li><strong><a href="https://www.adafruit.com/products/1887" title="https://www.adafruit.com/products/1887">Espruino</a></strong>: $40
+          <ul>
+            <li>Small form factor, battery efficient, native JS</li>
+            <li>Soldering Alert!</li>
+          </ul>
+        </li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Makerspaces for learning and fabricating</li>
+          <li>Lasercut can't produce y- or z-axis shapes</li>
+          <li>3d printing takes forever</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>Buying Guide: Chassis</h2>
+    </hgroup>
+    <article>
+      <img src="images/magician.jpg" alt="Sparkfun Magician Chassis" style="float: right; margin-top: -3em;" />
+      <p><strong><a href="https://www.sparkfun.com/products/10825" title="https://www.sparkfun.com/products/10825">https://www.sparkfun.com/products/10825</a></strong>: $15</p>
+      <ul>
+        <li>Good flexible chassis, but motors not so good.</li>
+      </ul>
+      <h3 style="font-weight: bold;">Make Your Own</h3>
+      <ul>
+        <li>Thingiverse: pattern-a-palooza</li>
+        <li>Cut out of box cardboard!</li>
+        <li>3D print vs laser cut</li>
+        <li>Next steps: print your your own drawbots, soccerbots or sumobots</li>
+        <li>
+        <h4>Seattle Makerspaces</h4>
+          <ul>
+            <li><a href="http://www.makerhaus.com">Makerhaus</a> (Fremont)</li>
+            <li><a href="http://www.metrixcreatespace.com/">Metrix Createspace</a> (SLU)</li>
+            <li><a href="https://seattleattic.com/">Seattle Attic</a> (Downtown)</li>
+            <li><a href="http://www.jigsawrenaissance.org/">Jigsaw Renaissance</a> (SoDo)</li>
+          </ul>
+        </li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Sumobot Jr: Add a ball bearing - 16mm or 3/4" - but just test at hardware store</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>Easy builds!</h2>
+    </hgroup>
+    <article>
+      <ul class="columns-2">
+        <li>
+          <p style="margin-bottom: .25em;"><a href="http://sumobotkit.com/">Sumobot Jr</a></p>
+          <img src="images/sumobotjr.png" style="max-height: 375px;" alt="SumobotJr" />
+        </li>
+        <li>
+          <p style="margin-bottom: .25em;"><a href="http://bocoup.com/weblog/javascript-tilt-sensor-with-johnny-five/">Knockover Detector</a></p>
+          <img src="images/tilt-sensor-detail.jpg" style="max-height: 375px;" alt="Tilt sensor detail" />
+        </li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Intermediate builds!</h2>
+    </hgroup>
+    <article>
+      <ul class="columns-2">
+        <li>
+          <p style="margin-bottom: .25em;"><a href="http://www.hackster.io/nicjansma/spark-water-sensor">SMS Alerting Water Sensor</a></p>
+          <img src="images/sparkcore-water-sensor.jpg" style="max-height: 375px;" alt="Water Sensor" />
+          <p>Soldering Alert!</p>
+        </li>
+        <li>
+          <p style="margin-bottom: .25em;"><a href="https://projects.tessel.io/projects/motion-activated-camera">Tessel Motion Activated Camera</a></p>
+          <img src="images/tessel-motion-activated-camera.jpg" style="max-height: 375px;" alt="Motion Activated Camera" />
+        </li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Advanced Builds!</h2>
+    </hgroup>
+    <article>
+      <ul class="columns-2">
+        <li>
+          <p style="margin-bottom: .25em;"><a href="http://www.instructables.com/id/Tweet-a-Pot-Twitter-Enabled-Coffee-Pot/?ALLSTEPS">Twitter Enabled Coffee Pot</a></p>
+          <img src="images/tweet-to-coffee.jpg" alt="Twitter-controlled coffeemaker" />
+          <p>Code port opportunity!</p>
+        </li>
+        <li>
+          <p style="margin-bottom: .25em;"><a href="http://www.unmaintained.com/index.php/spaghetti-ip-cam-arduino-motion-detect-sprinkler/#.U77ZaijJtaQ">Motion-detecting dog deterrent</a></p>
+          <img src="images/motion-activated-sprinkler.jpg" alt="Motion Activated Sprinkler" />
+          <p>Soldering Alert!</p>
+          <p>Code port opportunity!</p>
+        </li>
+      </ul>
+    </article>
+  </slide>
+
+<!--   <slide>
+    <hgroup>
+      <h2>Advanced and inspirational builds</h2>
+    </hgroup>
+    <article>
+      <ul class="columns-2">
+        <li>
+          <p style="margin-bottom: .25em;"><a href="http://www.examiner.com/article/amateur-drone-pilot-finds-man-missing-for-three-days/">Drone pilot finds man missing for three days</a></p>
+          <img src="images/" alt="" />
+        <li>
+        <li>
+          <p style="margin-bottom: .25em;"><a href="http://www.pdfsupply.com/blog/gold-fish-can-now-drive-cars-something-sounds-a-little-fishy/">Goldfish Air Vehicle</a></p>
+          <img src="images/" alt="" />
+        <li>
+      </ul>
+    </article>
+  </slide> -->
+
+  <slide>
+    <hgroup>
+      <h2>More Resources</h2>
+    </hgroup>
+    <article>
+      <ul>
+        <li></li>
+        <li>http://forums.nodebots.io/</li>
+        <li>http://bocoup.com/weblog/category/johnny-five/</li>
+        <li>http://507movements.com/</li>
+        <!-- <li>See "Lessons Learnt" from http://www.bossable.com/203/its-nodebotsday/</li> -->
+      </ul>
+    </article>
+  </slide>
+
+  <slide class="thank-you-slide segue nobackground">
+    <figure>
+      <img src="images/181828061.jpg" alt="Three generations of Mars rovers." />
+      <figcaption>181828061 / Three generations of Mars rovers. / Copyright Stocktrek Images</figcaption>
+    </figure>
+    <aside class="gdbar right" style="top: 450px"><img src="images/sjs.png"></aside>
+    <p class="auto-fadein" data-config-contact>
+      <!-- populated from slide_config.json -->
+    </p>
+  </slide>
+
+  <slide class="backdrop"></slide>
+  <!-- Above is used for the "slide" background. -->
+
+</slides>
+
+</body>
+</html>
