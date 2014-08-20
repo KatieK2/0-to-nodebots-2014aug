@@ -1,3 +1,3 @@
 #Contributing
 
-This is a static slide-show and is not generally maintained. 
+These are companion slides for a presentation given in August of 2014. This repo is not maintained. 
