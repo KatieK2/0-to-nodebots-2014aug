@@ -5,5 +5,5 @@
 
 These are the slides which accompanied @KatieK2's August 2014 presentation "From 0 to Nodebots in 30 Minutes" to the Seattle JS Meetup group. The slides may be of limited value without having heard the presentation.
 
-The slideshow framework is from [https://github.com/KatieK2/html5-slides](https://github.com/KatieK2/html5-slides}). [Live demo](https://rawgithub.com/KatieK2/html5-slides/master/template.html).
+The slideshow framework is from [https://github.com/KatieK2/html5-slides](https://github.com/KatieK2/html5-slides). [Live demo](https://rawgithub.com/KatieK2/html5-slides/master/template.html).
 
